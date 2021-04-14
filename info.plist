@@ -278,7 +278,7 @@ qrencode -s 6 -l H -o test.png "{query}"</string>
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.2</string>
+	<string>0.2.3</string>
 	<key>webaddress</key>
 	<string>https://github.com/mhristof/alfred-qrencode</string>
 </dict>
