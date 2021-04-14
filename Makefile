@@ -9,6 +9,9 @@ endif
 zip:
 	git archive  --format zip HEAD > qrencode.alfredworkflow
 
+validate:
+	xmllint info.plist
+
 .PHONY: help
 help: ## Show this help.
 	@grep '.*:.*##' Makefile | grep -v grep  | sort | sed 's/:.* ##/:/g' | column -t -s:
