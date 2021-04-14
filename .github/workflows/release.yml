@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: setup tools
+        run: apt-get install --yes libxml2-utils
       - uses: actions/checkout@v1
       - name: Create Release
         id: create_release
