@@ -17,6 +17,9 @@ validate:
 
 minor:
 	sed -i "" 's/$(TAG)/$(MINOR_NEXT)/' info.plist
+	git add info.plist
+	git commit -m 'Bumped version to $(MINOR_NEXT)'
+	semver -m
 
 .PHONY: help
 help: ## Show this help.
