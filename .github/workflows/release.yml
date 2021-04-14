@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: setup tools
-        run: apt-get install --yes libxml2-utils
+        run: sudo apt-get install --yes libxml2-utils
       - uses: actions/checkout@v1
       - name: Create Release
         id: create_release
