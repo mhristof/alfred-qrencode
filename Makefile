@@ -7,8 +7,8 @@ endif
 .ONESHELL:
 
 TAG := $(shell grep version info.plist -A1 | tail -1  | grep -oP '[\d\.]*')
-MINOR_NEXT := $(subst v,,$(lastword $(shell semver -n)))
-PATCH_NEXT := $(subst v,,$(lastword $(shell semver -n)))
+MINOR_NEXT := $(subst v,,$(lastword $(shell semver --minor --dryrun)))
+PATCH_NEXT := $(subst v,,$(lastword $(shell semver --patch --dryrun)))
 
 zip:
 	git archive  --format zip HEAD > alfred-qrencode.alfredworkflow
