@@ -1,6 +1,6 @@
 # QR
 
-Creates a QR image from the input text and copies it to the clipboard.
+Creates a QR image from the input text and show it with `preview`
 
 ## Requirements
 
