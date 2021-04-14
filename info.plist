@@ -3,14 +3,16 @@
 <plist version="1.0">
 <dict>
 	<key>bundleid</key>
-	<string></string>
+	<string>github.com/mhristof/alfred-qrencode</string>
+	<key>category</key>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>57554F2C-5A91-405A-A225-58B2369D18DC</key>
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>87448856-C022-4D5F-A786-78E5D6DB611F</string>
+				<string>CA894308-731C-4CC4-ADD5-C3AA63E9D890</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -45,9 +47,34 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CA894308-731C-4CC4-ADD5-C3AA63E9D890</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>D31ACFC1-5012-45C2-B9A2-A12B49ABFD6B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>sourceoutputuid</key>
+				<string>9AD2837A-2C6F-4D0D-ACC4-61610B7ABD31</string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>87448856-C022-4D5F-A786-78E5D6DB611F</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
-	<string></string>
+	<string>Mike Christof</string>
 	<key>description</key>
 	<string>Create an image with the qr code message</string>
 	<key>disabled</key>
@@ -56,6 +83,108 @@
 	<string>qrencode</string>
 	<key>objects</key>
 	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>QR image</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>D31ACFC1-5012-45C2-B9A2-A12B49ABFD6B</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH="/usr/local/bin:$PATH"
+
+command -v qrencode &amp;&gt; /dev/null || {
+  echo "Error, please install qrencode"
+  exit 1
+}
+
+qrencode -s 6 -l H -o test.png "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>57554F2C-5A91-405A-A225-58B2369D18DC</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>qr</string>
+				<key>subtext</key>
+				<string></string>
+				<key>text</key>
+				<string>Create a QR image from the input text</string>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.keyword</string>
+			<key>uid</key>
+			<string>6352B2C2-1DFD-458D-9B56-BA2F79D2F088</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>conditions</key>
+				<array>
+					<dict>
+						<key>inputstring</key>
+						<string>{query}</string>
+						<key>matchcasesensitive</key>
+						<false/>
+						<key>matchmode</key>
+						<integer>4</integer>
+						<key>matchstring</key>
+						<string>Error.*</string>
+						<key>outputlabel</key>
+						<string>exit 1</string>
+						<key>uid</key>
+						<string>9AD2837A-2C6F-4D0D-ACC4-61610B7ABD31</string>
+					</dict>
+				</array>
+				<key>elselabel</key>
+				<string>exit 0</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.conditional</string>
+			<key>uid</key>
+			<string>CA894308-731C-4CC4-ADD5-C3AA63E9D890</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
@@ -84,30 +213,6 @@ end run</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>concurrently</key>
-				<false/>
-				<key>escaping</key>
-				<integer>102</integer>
-				<key>script</key>
-				<string>export PATH="/usr/local/bin:$PATH"
-qrencode -s 6 -l H -o test.png "{query}"</string>
-				<key>scriptargtype</key>
-				<integer>0</integer>
-				<key>scriptfile</key>
-				<string></string>
-				<key>type</key>
-				<integer>0</integer>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.script</string>
-			<key>uid</key>
-			<string>57554F2C-5A91-405A-A225-58B2369D18DC</string>
-			<key>version</key>
-			<integer>2</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -126,30 +231,9 @@ qrencode -s 6 -l H -o test.png "{query}"</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>argumenttype</key>
-				<integer>0</integer>
-				<key>keyword</key>
-				<string>qr</string>
-				<key>subtext</key>
-				<string></string>
-				<key>text</key>
-				<string>Create a QR image from the input text</string>
-				<key>withspace</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.input.keyword</string>
-			<key>uid</key>
-			<string>6352B2C2-1DFD-458D-9B56-BA2F79D2F088</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Creates a QR image from the input text and copys it to the clipboard.</string>
 	<key>uidata</key>
 	<dict>
 		<key>57554F2C-5A91-405A-A225-58B2369D18DC</key>
@@ -169,19 +253,35 @@ qrencode -s 6 -l H -o test.png "{query}"</string>
 		<key>87448856-C022-4D5F-A786-78E5D6DB611F</key>
 		<dict>
 			<key>xpos</key>
-			<integer>575</integer>
+			<integer>715</integer>
 			<key>ypos</key>
-			<integer>110</integer>
+			<integer>200</integer>
 		</dict>
 		<key>943D14C8-A32A-47A7-BB4C-8EE384432C85</key>
 		<dict>
 			<key>xpos</key>
-			<integer>750</integer>
+			<integer>890</integer>
 			<key>ypos</key>
-			<integer>110</integer>
+			<integer>200</integer>
+		</dict>
+		<key>CA894308-731C-4CC4-ADD5-C3AA63E9D890</key>
+		<dict>
+			<key>xpos</key>
+			<integer>550</integer>
+			<key>ypos</key>
+			<integer>130</integer>
+		</dict>
+		<key>D31ACFC1-5012-45C2-B9A2-A12B49ABFD6B</key>
+		<dict>
+			<key>xpos</key>
+			<integer>710</integer>
+			<key>ypos</key>
+			<integer>70</integer>
 		</dict>
 	</dict>
+	<key>version</key>
+	<string>v0.1.0</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/mhristof/alfred-qrencode</string>
 </dict>
 </plist>
